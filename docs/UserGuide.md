@@ -25,10 +25,10 @@ to our CS2103T iP (individual Project), which was named `Duke`.
 This document is the User Guide for DukePro(f). It is intended to provide all the necessary information to use this software.
 The manual assumes that the user has the ability to type fast and prefers typing over other means of input.
 This User Guide contains the following sections:
-1. Command Summary (TODO HYPERLINKS)
-2. Quick Start
-3. Features
-4. FAQ
+* [Command Summary](#3-command-summary)
+* [Quick Start](#4-quick-start)
+* [Features](#5-features)
+* [FAQ](#6-faq)
 
 ## 3. Command Summary
 ***
@@ -45,7 +45,10 @@ Action | Format | Examples
 **[Display Next Event](#58-displaying-the-next-consultation-event--next_event)** | `next_event` | -
 **[List Upcoming Events](#59-listing-all-upcoming-events--upcoming_events)** | `upcoming_events` | -
 **[View Command Summary Page](#510-viweing-the-command-summary-page--command_summary)** | `command_summary` | -
-**[Exit](#511-exiting-the-app--exit)** | `exit` | -
+**[Add Blocked Slot](#511-blocking-a-time-slot--block)** | `block d/DATE t/TIMESLOT` | `add d/2020-01-01 t/0800-0900`
+**[List Blocked Slots](#512-listing-all-blocked-slots--list_blocked)** | `list_blocked` | -
+**[Delete Blocked Slots](#513-deleting-a-blocked-slot--delete_blocked)** | `delete INDEX` | `delete 2`
+**[Exit](#514-exiting-the-app--exit)** | `exit` | -
 
 
 ## 4. Quick Start
@@ -195,12 +198,31 @@ Opens a pop-up window with a Command Summary of all of DukePro(f)'s possible com
 
 Format: `command_summary`
 
-### 5.11 Exiting the app : `exit`
+### 5.11 Blocking a Time Slot: `block`
+Blocks the specified time slot and prevents an event from being created at the at time slot.
+
+Format: `block d/DATE t/TIMESLOT`
+
+Example(s):
+* `add d/2020-01-01 t/0800-0900`
+
+### 5.12 Listing all Blocked Slots: `list_blocked`
+Lists out all blocked slots in DukePro(f).
+
+Format: `list_blocked`
+
+### 5.13 Deleting a Blocked Slot: `delete_blocked`
+
+Deletes a blocked slot from DukePro(f) at the specified `INDEX`.
+
+Format: `delete INDEX`
+
+### 5.14 Exiting the app : `exit`
 Exits DukePro(f).
 
 Format: `exit`
 
-### 5.12 Saving all edits
+### 5.15 Saving all edits
 Event data is automatically saved into the hard disk after any command that changes the data. There is no
 need to save manually.
 
