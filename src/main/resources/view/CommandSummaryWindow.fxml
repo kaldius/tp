@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.image.Image?>
+<?import javafx.stage.Stage?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<fx:root resizable="false" title="Commands" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
+    <icons>
+        <Image url="@/images/help_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@CommandSummaryWindow.css" />
+            </stylesheets>
+                <VBox>
+                    <Label styleClass="commandSummaryHeader">
+                        <padding>
+                            <Insets bottom="5" left="10" top="5" right="5" />
+                        </padding>
+                        Command Summary
+                    </Label>
+                    <TextFlow style="-fx-font-size: 11pt">
+                        <padding>
+                            <Insets bottom="10" left="10" />
+                        </padding>
+                        <Text text="Click on the dropdown arrows below to find out more about the "/>
+                        <Text text="format, description and examples" style="-fx-font-weight: bold" />
+                        <Text text=" of each command!" />
+                        <Text text="&#10; &#x2022; Words in UPPER_CASE are the parameters to be supplied by the user." />
+                        <Text text="&#10; &#x2022; Items in square brackets are optional. (Items not in square brackets are necessary!)" />
+                        <Text text="&#10; &#x2022; Parameters that can have more than one entry will be anteceded by a '...'" />
+                    </TextFlow>
+                    <Accordion fx:id="commandDescription" />
+                </VBox>
+        </Scene>
+    </scene>
+</fx:root>

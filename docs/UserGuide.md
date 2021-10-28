@@ -44,7 +44,8 @@ Action | Format | Examples
 **[List](#57-listing-all-consultation-events--list)** | `list` | -
 **[Display Next Event](#58-displaying-the-next-consultation-event--next_event)** | `next_event` | -
 **[List Upcoming Events](#59-listing-all-upcoming-events--upcoming_events)** | `upcoming_events` | -
-**[Exit](#510-exiting-the-app--exit)** | `exit` | -
+**[View Command Summary Page](#510-viweing-the-command-summary-page--command_summary)** | `command_summary` | -
+**[Exit](#511-exiting-the-app--exit)** | `exit` | -
 
 
 ## 4. Quick Start
@@ -109,15 +110,19 @@ Action | Format | Examples
 
 Adds a consultation event to Dukepro(f).
 
-Format: `add n/NAME d/DATE t/TIME l/LOCATION [tag/TAG]... [r/REMARK]`
+Format: `add n/NAME d/DATE t/TIMESLOT l/LOCATION [tag/TAG]... [r/REMARK]`
+* tags with the text "URGENT" and "supplementary" will automatically be changed to red and yellow respectively to 
+enable the user to indicate the consultation's severity
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have any number of tags (including 0).
 </div>
 
 Example(s):
-* `add n/Lulu Yousef d/2020-01-01 t/0800-0900 l/NUS tag/Important tag/Supplementary`
+* `add n/Lulu Yousef d/2020-01-01 t/0800-0900 l/NUS tag/Important tag/supplementary`
 * `add n/Ruth Poh d/2020-02-02 t/1000-1100 l/The Deck r/May have to switch to zoom`
+* `tag/URGENT` will be shown as ![urgent tag](images/URGENT tag.png) 
+* `tag/supplementary` will be shown as ![supplementary tag](images/supplementary tag.png)
 
 ### 5.2 Clearing all Consultation Events : `clear`
 
@@ -185,12 +190,17 @@ Lists down all the upcoming consultation events for the current day.
 
 Format: `upcoming_events`
 
-### 5.10 Exiting the app : `exit`
+### 5.10 Viewing the Command Summary Page: `command_summary`
+Opens a pop-up window with a Command Summary of all of DukePro(f)'s possible commands.
+
+Format: `command_summary`
+
+### 5.11 Exiting the app : `exit`
 Exits DukePro(f).
 
 Format: `exit`
 
-### 5.11 Saving all edits
+### 5.12 Saving all edits
 Event data is automatically saved into the hard disk after any command that changes the data. There is no
 need to save manually.
 

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.Schedule;
+import seedu.address.model.blockedslot.BlockedSlot;
 import seedu.address.model.event.Event;
 
 /**
@@ -20,13 +21,17 @@ import seedu.address.model.event.Event;
 class JsonSerializableSchedule {
 
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
+    private final List<JsonAdaptedBlockedSlot> blockedSlots = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonSerializableSchedule} with the given events.
      */
     @JsonCreator
-    public JsonSerializableSchedule(@JsonProperty("events") List<JsonAdaptedEvent> events) {
+    public JsonSerializableSchedule(@JsonProperty("events") List<JsonAdaptedEvent> events,
+                                    @JsonProperty("blockedSlots") List<JsonAdaptedBlockedSlot> blockedSlots) {
         this.events.addAll(events);
+        this.blockedSlots.addAll(blockedSlots);
     }
 
     /**
@@ -36,10 +41,12 @@ class JsonSerializableSchedule {
      */
     public JsonSerializableSchedule(ReadOnlySchedule source) {
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+        blockedSlots.addAll(source.getBlockedSlotList().stream()
+                .map(JsonAdaptedBlockedSlot::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code Schedule} object.
+     * Converts this schedule into the model's {@code Schedule} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
@@ -49,7 +56,10 @@ class JsonSerializableSchedule {
             Event event = jsonAdaptedEvent.toModelType();
             schedule.addEvent(event);
         }
+        for (JsonAdaptedBlockedSlot jsonAdaptedBlockedSlots : blockedSlots) {
+            BlockedSlot blockedSlot = jsonAdaptedBlockedSlots.toModelType();
+            schedule.addBlockedSlot(blockedSlot);
+        }
         return schedule;
     }
-
 }

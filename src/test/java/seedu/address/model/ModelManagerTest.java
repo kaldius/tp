@@ -73,22 +73,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasEvent_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
-    }
-
-    @Test
-    public void hasEvent_eventNotInSchedule_returnsFalse() {
-        assertFalse(modelManager.hasEvent(ALICE));
-    }
-
-    @Test
-    public void hasEvent_eventInSchedule_returnsTrue() {
-        modelManager.addEvent(ALICE);
-        assertTrue(modelManager.hasEvent(ALICE));
-    }
-
-    @Test
     public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
     }

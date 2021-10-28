@@ -10,7 +10,7 @@ public class DateTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Date(null));
+        assertThrows(NullPointerException.class, () -> new Date((String) null));
     }
 
     @Test
@@ -45,4 +45,13 @@ public class DateTest {
         assertTrue(earlierDate.compareTo(laterDate) < 0);
         assertTrue(earlierDate.compareTo(sameAsEarlierDate) == 0);
     }
+
+    @Test void hasSameDate() {
+        Date earlierDate = new Date("2020-01-01");
+        Date sameAsEarlierDate = new Date("2020-01-01");
+        Date laterDate = new Date("2020-01-02");
+        assertTrue(earlierDate.hasSameDate(sameAsEarlierDate));
+        assertFalse(earlierDate.hasSameDate(laterDate));
+    }
+
 }

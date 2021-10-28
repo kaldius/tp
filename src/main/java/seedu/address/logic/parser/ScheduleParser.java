@@ -6,18 +6,25 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.AddBlockedSlotCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandSummaryCommand;
+import seedu.address.logic.commands.DeleteBlockedSlotCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterByTagCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FreeSlotsCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListBlockedSlotsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NextEventCommand;
 import seedu.address.logic.commands.UpcomingEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Date;
 
 /**
  * Parses user input.
@@ -69,11 +76,29 @@ public class ScheduleParser {
         case NextEventCommand.COMMAND_WORD:
             return new NextEventCommand();
 
+        case FreeSlotsCommand.COMMAND_WORD:
+            return new FreeSlotsCommand(Date.TODAY);
+
+        case FilterByTagCommand.COMMAND_WORD:
+            return new FilterByTagCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AddBlockedSlotCommand.COMMAND_WORD:
+            return new BlockCommandParser().parse(arguments);
+
+        case ListBlockedSlotsCommand.COMMAND_WORD:
+            return new ListBlockedSlotsCommand();
+
+        case CommandSummaryCommand.COMMAND_WORD:
+            return new CommandSummaryCommand();
+
+        case DeleteBlockedSlotCommand.COMMAND_WORD:
+            return new DeleteBlockedSlotCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -1,14 +1,12 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.ALICE;
+import static seedu.address.testutil.TypicalEvents.getTypicalEvents;
 import static seedu.address.testutil.TypicalEvents.getTypicalSchedule;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -16,8 +14,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.blockedslot.BlockedSlot;
+import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
-import seedu.address.testutil.EventBuilder;
 
 public class ScheduleTest {
 
@@ -41,32 +40,25 @@ public class ScheduleTest {
     }
 
     @Test
-    public void hasEvent_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> schedule.hasEvent(null));
-    }
-
-    @Test
-    public void hasEvent_eventNotInSchedule_returnsFalse() {
-        assertFalse(schedule.hasEvent(ALICE));
-    }
-
-    @Test
-    public void hasEvent_eventInSchedule_returnsTrue() {
-        schedule.addEvent(ALICE);
-        assertTrue(schedule.hasEvent(ALICE));
-    }
-
-    @Test
-    public void hasEvent_eventWithSameIdentityFieldsInSchedule_returnsTrue() {
-        schedule.addEvent(ALICE);
-        Event editedAlice = new EventBuilder(ALICE).withLocation(VALID_LOCATION_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(schedule.hasEvent(editedAlice));
-    }
-
-    @Test
     public void getEventList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> schedule.getEventList().remove(0));
+    }
+
+    @Test
+    public void emptySchedule_getFreeSlot_emptyList() {
+        Schedule empty = new Schedule();
+        assertEquals(new ArrayList<>(), empty.getFreeSlots(new Date("2020-01-01")));
+    }
+
+    @Test
+    public void nonEmptySchedule_getFreeSlot_nonEmptyList() {
+        Schedule schedule = getTypicalSchedule();
+        ArrayList<FreeSlot> freeSlots = schedule.getFreeSlots(new Date("2020-01-01"));
+        for (FreeSlot f: freeSlots) {
+            for (Event e: getTypicalEvents()) {
+                assertTrue(!f.isOverlappingWith(e));
+            }
+        }
     }
 
     /**
@@ -74,6 +66,7 @@ public class ScheduleTest {
      */
     private static class ScheduleStub implements ReadOnlySchedule {
         private final ObservableList<Event> events = FXCollections.observableArrayList();
+        private final ObservableList<BlockedSlot> blockedSlots = FXCollections.observableArrayList();
 
         ScheduleStub(Collection<Event> events) {
             this.events.setAll(events);
@@ -82,6 +75,11 @@ public class ScheduleTest {
         @Override
         public ObservableList<Event> getEventList() {
             return events;
+        }
+
+        @Override
+        public ObservableList<BlockedSlot> getBlockedSlotList() {
+            return blockedSlots;
         }
     }
 

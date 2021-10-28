@@ -7,13 +7,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.Overlappable;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents an Event in the schedule.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Event {
+public class Event implements Overlappable {
 
     // Identity fields
     private final Name name;
@@ -42,10 +43,12 @@ public class Event {
         return name;
     }
 
+    @Override
     public Date getDate() {
         return date;
     }
 
+    @Override
     public TimeSlot getTimeSlot() {
         return timeSlot;
     }
@@ -67,24 +70,11 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same name.
-     * This defines a weaker notion of equality between two events.
-     */
-    public boolean isSameEvent(Event otherEvent) {
-        if (otherEvent == this) {
-            return true;
-        }
-
-        return otherEvent != null
-                && otherEvent.getName().equals(getName());
-    }
-
-    /**
      * Compares this Event instance with another Event instance.
      *
      * @param other other Event to compare to.
-     * @return a positive integer if this Event's Date and timeSlot is chronologically before other Event,
-     * a negative integer if this Event's Date and timeSlot is chronologically after other Event,
+     * @return a positive integer if this Event's Date and timeSlot are chronologically before other Event,
+     * a negative integer if this Event's Date and timeSlot are chronologically after other Event,
      * zero if both Events are on the same date and start at the same time.
      */
     public int compareTo(Event other) {
@@ -148,4 +138,21 @@ public class Event {
         return builder.toString();
     }
 
+    public boolean hasSameDate(Overlappable overlappable) {
+        return this.date.hasSameDate(overlappable.getDate());
+    }
+
+    /**
+     * Checks if this Event overlaps with another Overlappable.
+     * @param overlappable Other Overlappable to check for overlaps.
+     * @return True if overlapping, false otherwise.
+     */
+    @Override
+    public boolean isOverlappingWith(Overlappable overlappable) {
+        boolean hasSameDate = this.hasSameDate(overlappable);
+        boolean isTimeSlotOverlapping = this.timeSlot
+                .isOverlappingWith(overlappable.getTimeSlot());
+
+        return hasSameDate && isTimeSlotOverlapping;
+    }
 }

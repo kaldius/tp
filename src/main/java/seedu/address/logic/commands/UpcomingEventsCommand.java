@@ -22,12 +22,16 @@ public class UpcomingEventsCommand extends Command {
         this.datePredicate = new EventContainsTodaysDatePredicate();
     }
 
+    public UpcomingEventsCommand(EventContainsTodaysDatePredicate predicate) {
+        this.datePredicate = predicate;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredEventList(datePredicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_EVENT_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+                String.format(Messages.MESSAGE_UPCOMING_EVENT_LISTED_OVERVIEW, model.getFilteredEventList().size()));
     }
 
     @Override

@@ -3,6 +3,8 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import javafx.scene.control.Label;
+
 /**
  * Represents a Tag in the schedule.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -49,6 +51,26 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    /**
+     * Creates a Label depending on the tag name
+     *
+     * @return a label with a background depending on the tag name.
+     * The tag name "URGENT" returns a label with a red background
+     * The tag name "supplementary" returns a label with a yellow background
+     */
+    public Label createLabel() {
+        if (tagName.equals("URGENT")) {
+            return new UrgentLabel();
+        } else if (tagName.equals("supplementary")) {
+            return new SupplementaryLabel();
+        } else {
+            return new Label(tagName);
+        }
+    }
+    public String getTagName() {
+        return tagName;
     }
 
 }

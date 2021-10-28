@@ -6,5 +6,20 @@
     "endTime" : "13:15",
     "location": "4th street",
     "remark": "This is a remark."
-  } ]
+  } ],
+  "blockedSlots" : [
+    {
+      "date" : "2020-02-06",
+      "startTime" : "1100",
+      "endTime" : "1200"
+    }, {
+      "date" : "2020-02-06",
+      "startTime" : "1200",
+      "endTime" : "1300"
+    }, {
+      "date" : "2020-02-06",
+      "startTime" : "1300",
+      "endTime" : "1400"
+    }
+  ]
 }

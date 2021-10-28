@@ -1,0 +1,20 @@
+.commandTitle {
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 14pt;
+}
+
+.commandSummaryHeader {
+    -fx-font-size: 18pt;
+}
+
+.formatLabel {
+    -fx-padding: 0 53 10 0;
+}
+
+.descriptionLabel {
+    -fx-padding: 0 15 10 0;
+}
+
+.examplesLabel {
+    -fx-padding: 0 32 0 0;
+}

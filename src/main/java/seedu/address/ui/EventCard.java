@@ -58,7 +58,7 @@ public class EventCard extends UiPart<Region> {
         remark.setText(event.getRemark().value);
         event.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(tag.createLabel()));
     }
 
     @Override

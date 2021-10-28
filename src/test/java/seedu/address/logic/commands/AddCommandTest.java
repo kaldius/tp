@@ -15,10 +15,14 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.FreeSlot;
 import seedu.address.model.Model;
+import seedu.address.model.Overlappable;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.Schedule;
+import seedu.address.model.blockedslot.BlockedSlot;
+import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
 
@@ -65,7 +69,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing, except isBlocked.
      */
     private class ModelStub implements Model {
         @Override
@@ -114,11 +118,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteEvent(Event target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -129,7 +128,29 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addBlockedSlot(BlockedSlot blockedSlot) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteBlockedSlot(BlockedSlot blockedSlot) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isBlocked(Overlappable overlappable) {
+            //This method needs to be called.
+            //Always returns false so that any Event can always be added.
+            return false;
+        }
+
+        @Override
         public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<BlockedSlot> getFilteredBlockedSlotList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -137,8 +158,24 @@ public class AddCommandTest {
         public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredBlockedSlotList(Predicate<BlockedSlot> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String filteredBlockedSlotListToString() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public Event nextEventInTheList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<FreeSlot> getFreeSlots(Date date) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -153,12 +190,6 @@ public class AddCommandTest {
             requireNonNull(event);
             this.event = event;
         }
-
-        @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return this.event.isSameEvent(event);
-        }
     }
 
     /**
@@ -166,12 +197,6 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingEventAdded extends ModelStub {
         final ArrayList<Event> eventsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return eventsAdded.stream().anyMatch(event::isSameEvent);
-        }
 
         @Override
         public void addEvent(Event event) {

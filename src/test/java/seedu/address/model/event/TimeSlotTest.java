@@ -69,4 +69,22 @@ public class TimeSlotTest {
         assertTrue(earlierSlot.compareTo(laterSlot) < 0);
         assertTrue(earlierSlot.compareTo(sameAsEarlierSlot) == 0);
     }
+
+    @Test
+    public void isOverlappingWith() {
+        TimeSlot toBeComparedSlot = new TimeSlot("1300", "1500");
+        TimeSlot notOverlappingSlot1 = new TimeSlot("1200", "1300");
+        TimeSlot notOverlappingSlot2 = new TimeSlot("1500", "1600");
+        TimeSlot overlappingSlot1 = new TimeSlot("1400", "1600");
+        TimeSlot overlappingSlot2 = new TimeSlot("1200", "1400");
+        TimeSlot overlappingSlot3 = new TimeSlot("1330", "1400");
+        TimeSlot overlappingSlot4 = new TimeSlot("1200", "1600");
+
+        assertFalse(toBeComparedSlot.isOverlappingWith(notOverlappingSlot1));
+        assertFalse(toBeComparedSlot.isOverlappingWith(notOverlappingSlot2));
+        assertTrue(toBeComparedSlot.isOverlappingWith(overlappingSlot1));
+        assertTrue(toBeComparedSlot.isOverlappingWith(overlappingSlot2));
+        assertTrue(toBeComparedSlot.isOverlappingWith(overlappingSlot3));
+        assertTrue(toBeComparedSlot.isOverlappingWith(overlappingSlot4));
+    }
 }

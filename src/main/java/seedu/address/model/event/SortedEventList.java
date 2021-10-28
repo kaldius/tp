@@ -10,6 +10,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import seedu.address.model.Overlappable;
+import seedu.address.model.SortedOverlappableList;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
@@ -19,7 +21,7 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
  * Supports a minimal set of list operations.
  *
  */
-public class SortedEventList implements Iterable<Event> {
+public class SortedEventList implements SortedOverlappableList<Event> {
     private class EventSorter implements Comparator<Event> {
         @Override
         public int compare(Event o1, Event o2) {
@@ -32,26 +34,13 @@ public class SortedEventList implements Iterable<Event> {
             new SortedList<>(FXCollections.unmodifiableObservableList(internalList),
                     new EventSorter());
 
-    /**
-     * Returns true if the list contains an equivalent event as the given argument.
-     */
-    public boolean contains(Event toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameEvent);
-    }
-
-    /**
-     * Adds an event to the list.
-     */
+    @Override
     public void add(Event toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
     }
 
-    /**
-     * Removes the equivalent event from the list.
-     * The event must exist in the list.
-     */
+    @Override
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -59,10 +48,6 @@ public class SortedEventList implements Iterable<Event> {
         }
     }
 
-    /**
-     * Replaces the event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the list.
-     */
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
@@ -87,16 +72,14 @@ public class SortedEventList implements Iterable<Event> {
         internalList.setAll(events);
     }
 
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
+    @Override
     public ObservableList<Event> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
     public Iterator<Event> iterator() {
-        return internalList.iterator();
+        return internalUnmodifiableList.iterator();
     }
 
     @Override
@@ -109,5 +92,22 @@ public class SortedEventList implements Iterable<Event> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    /**
+     * Checks if any Overlappable in the list overlaps with another Overlappable instance.
+     * @param overlappable Overlappable to check.
+     * @return True if overlaps, false otherwise.
+     */
+    @Override
+    public boolean isOverlappingWith(Overlappable overlappable) {
+        boolean hasOverlaps = false;
+        for (Overlappable o : internalList) {
+            if (o.isOverlappingWith(overlappable)) {
+                hasOverlaps = true;
+            }
+        }
+
+        return hasOverlaps;
     }
 }

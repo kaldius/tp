@@ -225,6 +225,21 @@ The `TimeSlot` class has 2 fields, `startTime` and `endTime` and their values ho
 
 A `TimeSlot` can be compared to another `TimeSlot` and this is done **only** using their `startTime` fields.
 
+### CommandSummaryCommand - Jacob
+#### Description
+
+The `CommandSummaryCommand` class is a command that opens a pop-up window containing a Command Summary of DukePro(f)'s
+possible commands.
+
+#### Implementation
+
+This implementation of this command adds another parameter `showCommands` (which has a default value of `false`) to the 
+constructor of `CommandResult`.
+
+When the command `command_summary` is input by the user, `LogicManager` parses the input and returns a 
+`CommandSummaryCommand`. The `execute` method is called with the `showCommands` parameter being set to `true`. 
+This causes `MainWindow` to execute the `handleCommandSummary` method, which opens the Command Summary Page.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

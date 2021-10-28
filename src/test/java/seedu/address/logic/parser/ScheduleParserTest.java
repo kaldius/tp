@@ -22,6 +22,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NextEventCommand;
+import seedu.address.logic.commands.UpcomingEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.NameContainsKeywordsPredicate;
@@ -74,6 +76,16 @@ public class ScheduleParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+    @Test
+    public void parseCommand_upcomingEvents() throws Exception {
+        assertTrue(parser.parseCommand(UpcomingEventsCommand.COMMAND_WORD) instanceof UpcomingEventsCommand);
+        assertTrue(parser.parseCommand(UpcomingEventsCommand.COMMAND_WORD + " 3") instanceof UpcomingEventsCommand);
+    }
+    @Test
+    public void parseCommand_nextEvent() throws Exception {
+        assertTrue(parser.parseCommand(NextEventCommand.COMMAND_WORD) instanceof NextEventCommand);
+        assertTrue(parser.parseCommand(NextEventCommand.COMMAND_WORD + " 3") instanceof NextEventCommand);
     }
 
     @Test

@@ -27,8 +27,8 @@ public class JsonAdaptedEventTest {
 
     private static final String VALID_DATE = BENSON.getDate().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_STARTTIME = BENSON.getTimeSlot().getStartTime();
-    private static final String VALID_ENDTIME = BENSON.getTimeSlot().getEndTime();
+    private static final String VALID_STARTTIME = BENSON.getTimeSlot().startTimeToString();
+    private static final String VALID_ENDTIME = BENSON.getTimeSlot().endTimeToString();
     private static final String VALID_ADDRESS = BENSON.getLocation().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)

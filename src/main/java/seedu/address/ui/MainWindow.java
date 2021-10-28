@@ -35,12 +35,16 @@ public class MainWindow extends UiPart<Stage> {
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandSummaryWindow commandSummaryWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem commandSummaryMenuItem;
 
     @FXML
     private StackPane eventListPanelPlaceholder;
@@ -65,6 +69,8 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
+
+        commandSummaryWindow = new CommandSummaryWindow();
 
         helpWindow = new HelpWindow();
     }
@@ -148,6 +154,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the command summary window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleCommandSummary() {
+        if (!commandSummaryWindow.isShowing()) {
+            commandSummaryWindow.show();
+        } else {
+            commandSummaryWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +178,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        commandSummaryWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -181,6 +200,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowCommands()) {
+                handleCommandSummary();
             }
 
             if (commandResult.isExit()) {

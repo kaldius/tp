@@ -1,6 +1,5 @@
 package seedu.address.model.event;
 
-import java.time.LocalDate;
 import java.util.function.Predicate;
 
 /**
@@ -13,7 +12,15 @@ public class EventContainsTodaysDatePredicate implements Predicate<Event> {
      * Constructs a {@code EventContainsTodaysDatePredicate}
      */
     public EventContainsTodaysDatePredicate() {
-        this.today = new Date(LocalDate.now().toString());
+        this.today = Date.TODAY;
+    }
+
+    /**
+     * Constructs a {@code EventContainsCurrentTimePredicate} with {@code LocalTime}
+     * and {@code Date} arguments
+     */
+    public EventContainsTodaysDatePredicate(Date date) {
+        this.today = date;
     }
 
     @Override

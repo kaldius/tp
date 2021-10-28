@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.Schedule;
+import seedu.address.model.blockedslot.BlockedSlot;
 import seedu.address.model.event.Event;
 
 /**
@@ -63,17 +64,27 @@ public class TypicalEvents {
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRemark(VALID_REMARK_BOB)
             .build();
 
+    public static final BlockedSlot ONE = new BlockedSlotBuilder().withDate("2020-02-06").withTimeSlot(
+            "1100", "1200").build();
+    public static final BlockedSlot TWO = new BlockedSlotBuilder().withDate("2020-02-06").withTimeSlot(
+            "1200", "1300").build();
+    public static final BlockedSlot THREE = new BlockedSlotBuilder().withDate("2020-02-06").withTimeSlot(
+            "1300", "1400").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalEvents() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical events.
+     * Returns a {@code Schedule} with all the typical events.
      */
     public static Schedule getTypicalSchedule() {
         Schedule ab = new Schedule();
         for (Event event : getTypicalEvents()) {
             ab.addEvent(event);
+        }
+        for (BlockedSlot blockedSlot : getTypicalBlockedSlots()) {
+            ab.addBlockedSlot(blockedSlot);
         }
         return ab;
     }
@@ -81,4 +92,9 @@ public class TypicalEvents {
     public static List<Event> getTypicalEvents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    public static List<BlockedSlot> getTypicalBlockedSlots() {
+        return new ArrayList<>(Arrays.asList(ONE, TWO, THREE));
+    }
+
 }

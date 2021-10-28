@@ -70,30 +70,6 @@ public class SortedEventListTest {
     }
 
     @Test
-    public void contains_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> sortedEventList.contains(null));
-    }
-
-    @Test
-    public void contains_eventNotInList_returnsFalse() {
-        assertFalse(sortedEventList.contains(ALICE));
-    }
-
-    @Test
-    public void contains_eventInList_returnsTrue() {
-        sortedEventList.add(ALICE);
-        assertTrue(sortedEventList.contains(ALICE));
-    }
-
-    @Test
-    public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
-        sortedEventList.add(ALICE);
-        Event editedAlice = new EventBuilder(ALICE).withLocation(VALID_LOCATION_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(sortedEventList.contains(editedAlice));
-    }
-
-    @Test
     public void add_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> sortedEventList.add(null));
     }
@@ -193,5 +169,46 @@ public class SortedEventListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> sortedEventList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void isOverlappingWith() {
+        sortedEventList.add(ALICE);
+        Event noOverlappingDateNoOverlappingSlot = new EventBuilder(BENSON)
+                .withTimeSlot("0900", "1000")
+                .withDate("2020-01-02")
+                .build();
+        Event noOverlappingDateHasOverlappingSlot = new EventBuilder(BENSON)
+                .withTimeSlot("0830", "0930")
+                .withDate("2020-01-02")
+                .build();
+        Event overlappingDateNoOverlappingSlot = new EventBuilder(BENSON)
+                .withTimeSlot("0900", "1000")
+                .withDate("2020-01-01")
+                .build();
+        Event overlappingDateHasOverlappingSlot1 = new EventBuilder(BENSON)
+                .withTimeSlot("0830", "0930")
+                .withDate("2020-01-01")
+                .build();
+        Event overlappingDateHasOverlappingSlot2 = new EventBuilder(BENSON)
+                .withTimeSlot("0730", "0830")
+                .withDate("2020-01-01")
+                .build();
+        Event overlappingDateHasOverlappingSlot3 = new EventBuilder(BENSON)
+                .withTimeSlot("0830", "0845")
+                .withDate("2020-01-01")
+                .build();
+        Event overlappingDateHasOverlappingSlot4 = new EventBuilder(BENSON)
+                .withTimeSlot("0700", "1000")
+                .withDate("2020-01-01")
+                .build();
+
+        assertFalse(sortedEventList.isOverlappingWith(noOverlappingDateNoOverlappingSlot));
+        assertFalse(sortedEventList.isOverlappingWith(noOverlappingDateHasOverlappingSlot));
+        assertFalse(sortedEventList.isOverlappingWith(overlappingDateNoOverlappingSlot));
+        assertTrue(sortedEventList.isOverlappingWith(overlappingDateHasOverlappingSlot1));
+        assertTrue(sortedEventList.isOverlappingWith(overlappingDateHasOverlappingSlot2));
+        assertTrue(sortedEventList.isOverlappingWith(overlappingDateHasOverlappingSlot3));
+        assertTrue(sortedEventList.isOverlappingWith(overlappingDateHasOverlappingSlot4));
     }
 }

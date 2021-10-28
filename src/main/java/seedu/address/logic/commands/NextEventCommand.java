@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventContainsCurrentTimePredicate;
@@ -25,14 +26,21 @@ public class NextEventCommand extends Command {
         this.timePredicate = new EventContainsCurrentTimePredicate();
     }
 
+    public NextEventCommand(EventContainsCurrentTimePredicate predicate) {
+        this.timePredicate = predicate;
+    }
+
     @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredEventList(timePredicate);
-        Event firstEvent = model.nextEventInTheList();
-        model.updateFilteredEventList(new IsEventPredicate(firstEvent));
-        return new CommandResult(
-                String.format(Messages.MESSAGE_EVENT_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+    public CommandResult execute(Model model) throws CommandException {
+        try {
+            requireNonNull(model);
+            model.updateFilteredEventList(timePredicate);
+            Event firstEvent = model.nextEventInTheList();
+            model.updateFilteredEventList(new IsEventPredicate(firstEvent));
+            return new CommandResult(Messages.MESSAGE_NEXT_EVENT_LISTED_OVERVIEW);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_NO_NEXT_EVENT);
+        }
     }
 
     @Override

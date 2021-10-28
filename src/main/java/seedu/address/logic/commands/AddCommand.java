@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.SlotBlockedException;
 import seedu.address.model.Model;
+import seedu.address.model.blockedslot.BlockedSlot;
 import seedu.address.model.event.Event;
 
 /**
@@ -53,6 +55,9 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (model.isBlocked(toAdd)) {
+            throw new SlotBlockedException(BlockedSlot.SLOT_BLOCKED);
+        }
         model.addEvent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
