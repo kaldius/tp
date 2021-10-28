@@ -43,6 +43,13 @@ public class CommandDescCard extends UiPart<TitledPane> {
             this.examples.setText("add n/Lulu Yousef d/2020-01-01 t/0800-0900 l/NUS tag/Important tag/supplementary"
                     + "\n" + "add n/Ruth Poh d/2020-02-02 t/1000-1100 l/The Deck r/May have to switch to zoom");
             break;
+        case BLOCK:
+            this.getRoot().setText("Block Command");
+            this.format.setText("block d/DATE t/TIMESLOT");
+            this.description.setText("Blocks the specified time slot and prevents an event from being created at"
+                    + "the at time slot");
+            this.examples.setText("add d/2020-01-01 t/0800-0900");
+            break;
         case CLEAR:
             this.getRoot().setText("Clear Command");
             this.format.setText("clear");
@@ -58,8 +65,14 @@ public class CommandDescCard extends UiPart<TitledPane> {
         case DELETE:
             this.getRoot().setText("Delete Command");
             this.format.setText("delete INDEX");
-            this.description.setText("Deletes a consultationn event from DukePro(f) at the specified INDEX");
+            this.description.setText("Deletes a consultation event from DukePro(f) at the specified INDEX");
             this.examples.setText("delete 1");
+            break;
+        case DELETE_BLOCKED:
+            this.getRoot().setText("Delete Blocked Slot Command");
+            this.format.setText("delete_blocked INDEX");
+            this.description.setText("Deletes a blocked slot from DukePro(f) at the specified INDEX");
+            this.examples.setText("delete_blocked 1");
             break;
         case EDIT:
             this.getRoot().setText("Edit Command");
@@ -93,6 +106,12 @@ public class CommandDescCard extends UiPart<TitledPane> {
             this.format.setText("list");
             this.description.setText("Lists down all consultation events scheduled in DukePro(f)");
             this.examples.setText("list");
+            break;
+        case LIST_BLOCKED:
+            this.getRoot().setText("List Blocked Slots Command");
+            this.format.setText("list_blocked");
+            this.description.setText("Lists out all blocked slots in DukePro(f)");
+            this.examples.setText("list_blocked");
             break;
         case NEXT_EVENT:
             this.getRoot().setText("Next Event Command");

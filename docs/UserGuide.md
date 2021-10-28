@@ -215,7 +215,7 @@ Format: `list_blocked`
 
 Deletes a blocked slot from DukePro(f) at the specified `INDEX`.
 
-Format: `delete INDEX`
+Format: `delete_blocked INDEX`
 
 ### 5.14 Exiting the app : `exit`
 Exits DukePro(f).
