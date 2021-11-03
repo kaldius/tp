@@ -9,12 +9,8 @@ import seedu.address.model.FreeSlot;
 import seedu.address.model.Model;
 import seedu.address.model.event.Date;
 
-
-
-
-
-public class FreeSlotsCommand extends Command {
-    public static final String COMMAND_WORD = "free_slots";
+public class ListFreeSlotsCommand extends Command {
+    public static final String COMMAND_WORD = "list_free";
 
     public static final String MESSAGE_SUCCESS = "Here are your free slots:";
 
@@ -25,7 +21,7 @@ public class FreeSlotsCommand extends Command {
      *
      * @param today Date instance for today
      */
-    public FreeSlotsCommand(Date today) {
+    public ListFreeSlotsCommand(Date today) {
         requireNonNull(today);
         this.today = today;
     }

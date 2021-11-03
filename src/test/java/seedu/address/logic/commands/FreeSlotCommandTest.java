@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Test;
 public class FreeSlotCommandTest {
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new FreeSlotsCommand(null));
+        assertThrows(NullPointerException.class, () -> new ListFreeSlotsCommand(null));
     }
 }

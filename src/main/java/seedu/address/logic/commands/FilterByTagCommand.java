@@ -8,12 +8,13 @@ import seedu.address.model.Model;
 import seedu.address.model.event.TagContainsKeywordsPredicate;
 
 public class FilterByTagCommand extends Command {
-    public static final String COMMAND_WORD = "tag";
+    public static final String COMMAND_WORD = "filter_tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose tags contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " urgent supplementary";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all consultation events whose tags"
+            + " contain any of the specified keywords (case-insensitive)"
+            + " and displays them as an indexed list.\n"
+            + "Parameters: TAG_NAME [MORE_TAG_NAMES]...\n"
+            + "Example: " + COMMAND_WORD + " URGENT supplementary";
 
     private final TagContainsKeywordsPredicate tagPredicate;
 

@@ -7,7 +7,6 @@ import seedu.address.model.Model;
 public class ListBlockedSlotsCommand extends Command {
 
     public static final String COMMAND_WORD = "list_blocked";
-
     public static final String MESSAGE_SUCCESS_NONEMPTY = "Here are all your blocked slots:\n%1$s";
     public static final String MESSAGE_SUCCESS_EMPTY = "You have not blocked any slots.";
 
