@@ -1,10 +1,10 @@
 .commandTitle {
     -fx-font-family: "Open Sans";
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
 }
 
 .commandSummaryHeader {
-    -fx-font-size: 18pt;
+    -fx-font-size: 14pt;
 }
 
 .formatLabel {

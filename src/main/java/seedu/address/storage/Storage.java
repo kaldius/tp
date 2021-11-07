@@ -27,6 +27,6 @@ public interface Storage extends ScheduleStorage, UserPrefsStorage {
     Optional<ReadOnlySchedule> readSchedule() throws DataConversionException, IOException;
 
     @Override
-    void saveSchedule(ReadOnlySchedule addressBook) throws IOException;
+    void saveSchedule(ReadOnlySchedule schedule) throws IOException;
 
 }

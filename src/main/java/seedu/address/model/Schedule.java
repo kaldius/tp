@@ -16,7 +16,7 @@ import seedu.address.model.event.SortedEventList;
 import seedu.address.model.event.TimeSlot;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the schedule level
  * Duplicates are not allowed (by .isSameEvent comparison)
  */
 public class Schedule implements ReadOnlySchedule {
@@ -78,8 +78,8 @@ public class Schedule implements ReadOnlySchedule {
     //// event-level operations
 
     /**
-     * Adds an event to the address book.
-     * The event must not already exist in the address book.
+     * Adds an event to the schedule.
+     * The event must not already exist in the schedule.
      */
     public void addEvent(Event e) {
         events.add(e);
@@ -87,8 +87,8 @@ public class Schedule implements ReadOnlySchedule {
 
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * {@code target} must exist in the schedule.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the schedule.
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
@@ -98,7 +98,7 @@ public class Schedule implements ReadOnlySchedule {
 
     /**
      * Removes {@code key} from this {@code Schedule}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the schedule.
      */
     public void removeEvent(Event key) {
         events.remove(key);
@@ -215,7 +215,7 @@ public class Schedule implements ReadOnlySchedule {
     }
 
     /**
-     * Goes through both sortedEventList and sortedBlockedEventList to find free time slots
+     * Goes through both sortedEventList and sortedBlockedSlotList to find free time slots
      * between events and blocked slots.
      *
      * @param today starting date

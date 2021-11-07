@@ -28,9 +28,9 @@ public class JsonSerializableScheduleTest {
     public void toModelType_typicalEventsFile_success() throws Exception {
         JsonSerializableSchedule dataFromFile = JsonUtil.readJsonFile(TYPICAL_EVENTS_FILE,
                 JsonSerializableSchedule.class).get();
-        Schedule addressBookFromFile = dataFromFile.toModelType();
+        Schedule scheduleFromFile = dataFromFile.toModelType();
         Schedule typicalEventsSchedule = TypicalEvents.getTypicalSchedule();
-        assertEquals(addressBookFromFile, typicalEventsSchedule);
+        assertEquals(scheduleFromFile, typicalEventsSchedule);
     }
 
     @Test

@@ -39,11 +39,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlySchedule getSampleSchedule() {
-        Schedule sampleAb = new Schedule();
+        Schedule sampleSc = new Schedule();
         for (Event sampleEvent : getSampleEvents()) {
-            sampleAb.addEvent(sampleEvent);
+            sampleSc.addEvent(sampleEvent);
         }
-        return sampleAb;
+        return sampleSc;
     }
 
     /**

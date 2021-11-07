@@ -4,7 +4,7 @@ import seedu.address.model.Schedule;
 import seedu.address.model.event.Event;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building Schedule objects.
  * Example usage: <br>
  *     {@code Schedule ab = new ScheduleBuilder().withPerson("John", "Doe").build();}
  */

@@ -29,7 +29,7 @@ With DukePro(f), you will be able to:
 * Block certain time slots (to ensure your consultations don't clash with other commitments)
 
 Want to get started using DukePro(f)?
-[**Click here**](https://ay2122s1-cs2103t-t11-4.github.io/tp/UserGuide.html#4-quick-start)!
+[**Click here**](https://ay2122s1-cs2103t-t11-4.github.io/tp/UserGuide.html#4-quick-start) for the User Guide!
 
 Want to try your hand at improving DukePro(f)? [**Click here**](https://ay2122s1-cs2103t-t11-4.github.io/tp/DeveloperGuide.html) for the Developer Guide!
 

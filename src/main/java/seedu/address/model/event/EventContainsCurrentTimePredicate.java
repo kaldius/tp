@@ -7,6 +7,7 @@ import java.util.function.Predicate;
  * Tests that an {@code Event}'s {@code Timeslot} is after current time.
  */
 public class EventContainsCurrentTimePredicate implements Predicate<Event> {
+
     private final LocalTime time;
     private final Date today;
 

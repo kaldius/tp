@@ -36,7 +36,7 @@ public class DeleteBlockedSlotCommand extends Command {
         List<BlockedSlot> lastShownList = model.getFilteredBlockedSlotList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BLOCKED_SLOT_DISPLAYED_INDEX);
         }
 
         BlockedSlot blockedSlotToDelete = lastShownList.get(targetIndex.getZeroBased());

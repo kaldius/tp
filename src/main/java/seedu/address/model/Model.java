@@ -26,7 +26,6 @@ public interface Model {
 
     /**
      * Returns the user prefs.
-     * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
 
@@ -41,40 +40,40 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' schedule file path.
      */
     Path getScheduleFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' schedule file path.
      */
-    void setScheduleFilePath(Path addressBookFilePath);
+    void setScheduleFilePath(Path scheduleFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces schedule data with the data in {@code schedule}.
      */
-    void setSchedule(ReadOnlySchedule addressBook);
+    void setSchedule(ReadOnlySchedule schedule);
 
     /** Returns the Schedule */
     ReadOnlySchedule getSchedule();
 
     /**
      * Deletes the given event.
-     * The event must exist in the address book.
+     * The event must exist in the schedule.
      */
     void deleteEvent(Event target);
 
     /**
      * Adds the given event.
-     * {@code event} must not already exist in the address book.
+     * {@code event} must not already exist in the schedule.
      * @throws SlotBlockedException if the Date and TimeSlot of the Event to add coincides with the blocked period.
      */
     void addEvent(Event event);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * {@code target} must exist in the schedule.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the schedule.
      */
     void setEvent(Event target, Event editedEvent);
 

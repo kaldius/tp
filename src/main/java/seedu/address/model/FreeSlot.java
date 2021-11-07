@@ -8,6 +8,7 @@ import seedu.address.model.event.Date;
 import seedu.address.model.event.TimeSlot;
 
 public class FreeSlot implements Overlappable {
+
     private Date date;
     private TimeSlot timeSlot;
 

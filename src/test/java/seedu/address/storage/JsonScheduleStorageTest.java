@@ -92,12 +92,12 @@ public class JsonScheduleStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code schedule} at the specified {@code filePath}.
      */
-    private void saveSchedule(ReadOnlySchedule addressBook, String filePath) {
+    private void saveSchedule(ReadOnlySchedule schedule, String filePath) {
         try {
             new JsonScheduleStorage(Paths.get(filePath))
-                    .saveSchedule(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveSchedule(schedule, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

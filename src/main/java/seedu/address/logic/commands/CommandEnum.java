@@ -16,6 +16,7 @@ public enum CommandEnum {
     HELP,
     LIST,
     LIST_BLOCKED,
+    LIST_FREE,
     NEXT_EVENT,
     UPCOMING_EVENTS;
 }

@@ -113,6 +113,13 @@ public class CommandDescCard extends UiPart<TitledPane> {
             this.description.setText("Lists out all blocked slots in DukePro(f)");
             this.examples.setText("list_blocked");
             break;
+        case LIST_FREE:
+            this.getRoot().setText("List Free Slots Command");
+            this.format.setText("list_free");
+            this.description.setText("List out all free slots from 0000 today "
+                    + "to 2359 of the date with last event/blocked slot");
+            this.examples.setText("list_free");
+            break;
         case NEXT_EVENT:
             this.getRoot().setText("Next Event Command");
             this.format.setText("next_event");

@@ -43,7 +43,7 @@ public class DeleteBlockedSlotCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBlockedSlotList().size() + 1);
         DeleteBlockedSlotCommand deleteBlockedSlotCommand = new DeleteBlockedSlotCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteBlockedSlotCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteBlockedSlotCommand, model, Messages.MESSAGE_INVALID_BLOCKED_SLOT_DISPLAYED_INDEX);
     }
 
     @Test

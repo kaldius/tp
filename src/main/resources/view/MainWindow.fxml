@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="DukePro(f)" type="javafx.stage.Stage"
+<fx:root minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="DukePro(f)" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <icons>
     <Image url="@/images/DukePro(f).png" />
@@ -38,14 +38,14 @@
         </MenuBar>
 
         <SplitPane dividerPositions="0.9" VBox.vgrow="ALWAYS">
-          <VBox minWidth="500">
+          <VBox minWidth="700">
             <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
               <padding>
                <Insets bottom="5" left="10" right="10" top="5" />
               </padding>
             </StackPane>
 
-            <VBox fx:id="resultDisplayPlaceholder" prefHeight="180.0" styleClass="pane-with-border">
+            <VBox fx:id="resultDisplayPlaceholder" prefHeight="200.0" styleClass="pane-with-border">
               <padding>
                 <Insets bottom="5" left="10" right="10" top="5" />
               </padding>

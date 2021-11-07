@@ -100,7 +100,7 @@ public class AddBlockedSlotCommandTest {
         }
 
         @Override
-        public void setScheduleFilePath(Path addressBookFilePath) {
+        public void setScheduleFilePath(Path scheduleFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -110,7 +110,7 @@ public class AddBlockedSlotCommandTest {
         }
 
         @Override
-        public void setSchedule(ReadOnlySchedule newData) {
+        public void setSchedule(ReadOnlySchedule schedule) {
             throw new AssertionError("This method should not be called.");
         }
 

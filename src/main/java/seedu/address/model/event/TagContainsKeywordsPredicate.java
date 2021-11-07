@@ -11,6 +11,7 @@ import seedu.address.model.tag.Tag;
 * Tests that a {@code Event}'s {@code Tag} matches any of the keywords given.
 */
 public class TagContainsKeywordsPredicate implements Predicate<Event> {
+
     private final List<String> keywords;
 
     public TagContainsKeywordsPredicate(List<String> keywords) {
@@ -23,6 +24,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Event> {
         return keywords.stream()
                 .anyMatch(keyword -> matchTagsIgnoreCase(tags, keyword));
     }
+
     private boolean matchTagsIgnoreCase(Set<Tag> tags, String keyword) {
         return tags.stream()
                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.getTagName(), keyword));

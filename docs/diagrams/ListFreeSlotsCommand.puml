@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+participant ListFreeSlotsCommand
+participant CommandResult
+participant Model
+participant Schedule
+-> ListFreeSlotsCommand:execute()
+activate ListFreeSlotsCommand
+ListFreeSlotsCommand -> Model:getFreeSlots()
+activate Model
+Model -> Schedule:getFreeSlots()
+activate Schedule
+return freeSlots
+return freeSlots
+ListFreeSlotsCommand -> CommandResult:CommandResult()
+activate CommandResult
+return result
+return result
+@enduml

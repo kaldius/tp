@@ -9,7 +9,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventContainsCurrentTimePredicate;
 import seedu.address.model.event.IsEventPredicate;
 
-
 /**
  * Displays the next event in the Schedule based on the current time.
  */

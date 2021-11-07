@@ -9,6 +9,9 @@ import seedu.address.model.FreeSlot;
 import seedu.address.model.Model;
 import seedu.address.model.event.Date;
 
+/**
+ * Lists out all the free slots in the schedule.
+ */
 public class ListFreeSlotsCommand extends Command {
     public static final String COMMAND_WORD = "list_free";
 

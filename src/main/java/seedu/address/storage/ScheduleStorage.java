@@ -33,14 +33,14 @@ public interface ScheduleStorage {
 
     /**
      * Saves the given {@link ReadOnlySchedule} to the storage.
-     * @param addressBook cannot be null.
+     * @param schedule cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveSchedule(ReadOnlySchedule addressBook) throws IOException;
+    void saveSchedule(ReadOnlySchedule schedule) throws IOException;
 
     /**
      * @see #saveSchedule(ReadOnlySchedule)
      */
-    void saveSchedule(ReadOnlySchedule addressBook, Path filePath) throws IOException;
+    void saveSchedule(ReadOnlySchedule schedule, Path filePath) throws IOException;
 
 }

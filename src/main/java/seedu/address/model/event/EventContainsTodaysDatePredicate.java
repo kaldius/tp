@@ -6,6 +6,7 @@ import java.util.function.Predicate;
  * Tests that an {@code Event}'s {@code Date} matches today's date.
  */
 public class EventContainsTodaysDatePredicate implements Predicate<Event> {
+
     private final Date today;
 
     /**

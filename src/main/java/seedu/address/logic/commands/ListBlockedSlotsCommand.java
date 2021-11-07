@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 
+/**
+ * Lists out all the blocked slots in the schedule.
+ */
 public class ListBlockedSlotsCommand extends Command {
 
     public static final String COMMAND_WORD = "list_blocked";

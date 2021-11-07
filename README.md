@@ -6,9 +6,9 @@
 
 ![Ui](docs/images/Ui.png)
 
-DukePro(f) is an application that assists **professors in the university** in planning for their weekly engagements. 
-Amidst long hours of lectures and tutorials in the week, professors may still need to cater timeslots for **student 
-consultations**, which can be hard to come by and difficult to keep track of. 
+DukePro(f) is a schedule-planning desktop application that assists **university professors** in managing
+their **consultations**. Amidst long hours of lectures and tutorials in the week, professors may still need 
+to cater timeslots for **student consultations**, which can be hard to come by and difficult to keep track of. 
 
 It is named `DukePro(f)` (Duke-Professor) because our project's target audience is professors, and it is also a nod 
 to our CS2103T iP (individual Project), which was named `Duke`.
@@ -19,10 +19,12 @@ to our CS2103T iP (individual Project), which was named `Duke`.
 
 With DukePro(f), professors will be able to:
 
-  * block out timeslots for lecture/tutorial/personal commitments
-  * query for available consultation timeslots
-  * add, delete or edit consultation timeslots
-  * list all consultation timeslots
+* Add, edit, and delete your consultations
+* List all of your consultations, or just your next consultation
+* List your free time slots for consultation booking
+* Block certain time slots to ensure your consultations don't clash with other commitments
+* List all of the time slots that you've blocked so far
+* And many more!
 
 # Acknowledgement
 

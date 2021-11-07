@@ -2,6 +2,15 @@
 layout: page
 title: Developer Guide
 ---
+
+<p align="center">
+  <img width="350" src="images/dukelogo.png">
+</p>
+## Introduction
+***
+
+## Table of Contents
+***
 * Table of Contents
 {:toc}
 
@@ -146,17 +155,52 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### SortedEventList - Galvin
+
 #### Description
-The `SortedEventList` class provides an abstraction over an internal list of `Events`. 
+The `SortedEventList` class provides an abstraction over an internal list of `Events`.
+The `SortedEventList` supports minimal list operations including add, remove and set.
+Duplicate Events are allowed in this Event list to accommodate repeated consultations with the same person.
 
 #### Implementation
 The `SortedEventList` class contains 2 fields, `internalList` and `internalUnmodifiableList`.
 
 The `internalList` is an `ObservableArrayList` that is not sorted.
 
-The `internalUnmodifiableList` is a `SortedList` that wraps around the `internalList` to maintain the sorted property of Events
+The `internalUnmodifiableList` is a `SortedList` that wraps around the `internalList` to maintain the sorted property of Events.
+All changes in the `internalList` are propagated immediately to the SortedList.
+An `EventComparator` class that implements the `Comparator` interface is created and used when constructing `SortedList`.
 
-The `SortedEventList#asUnmodifiableObservableList()` method returns an ObservableList that `Schedule` uses as a field to store events. This ObservableList will have its Events sorted chronologically.
+The `SortedEventList#asUnmodifiableObservableList()` method returns an ObservableList that the Ui can listen to display the list of consultations on the right.
+This ObservableList will have its Events sorted chronologically.
+This ObservableList is unmodifiable as part of defensive programming to prevent other classes from adding or deleting events from the ObservableList.
+
+### List Free Slots Command - Galvin
+
+#### Description
+The `ListFreeSlotsCommand` class is a command that lists all the free slots in the schedule starting from 0000 of today to 2359 of day with the last event/blocked slot.
+
+#### Implementation
+The `ListFreeSlotsCommand` class has one field `today` of type `Date`. This field is necessary to allow testing, where a specific date can be passed in to the `ListFreeSlotsCommand`.
+
+![](images/ListFreeSlotsCommand.png)
+
+The `execute()` method calls `model#getFreeSlots()` which calls `schedule#getFreeSlots()`.
+
+![](images/getFreeSlotsActivityDiagram.png)
+
+The `schedule#getFreeSlots()` method first combines the `SortedEventList` and the `SortedBlockedSlotList` into one list of Overlappables.
+
+The `schedule#getFreeSlots()` method then iterates through this list of Overlappables to find free slots between events and blocked slots. 
+
+#### Design Considerations:
+
+|   |Pros|Cons|
+|---|---|---|
+| Alternative 1: Implement FreeSlots as a special Event and store FreeSlots in the SortedEventList|Easy to list all free slots in the schedule by using a predicate to select only FreeSlots and updating the filteredList.|Adding, deleting and editing event will be harder as the corresponding FreeSlot at that timeslot will need to be deleted or edited. Only one list containing all Events, FreeSlots and BlockedSlots is allowed.|
+| Alternative 2 (current): Go through the schedule each time the user uses the `list_free` command to find free slots|Easy to add and delete and edit events in SortedEventList. Easy to add additional lists such as SortedBlockedSlotList.|More computationally intensive as each time the user uses the `list_free` command, DukePro(f) will iterate through all events and blocked slots to find free slots in between.|
+
+Alternative 2 is chosen to allow future implementations such as adding additional lists 
+containing different types of events or commitments. 
 
 ### UpcomingEventsCommand - Lulu
 #### Description
@@ -214,7 +258,7 @@ As a Remark is an optional input, if user does not input any remarks when adding
 
 To display the remark in the GUI, a new `Label` called `remark` is added to `EventCard` as well as `EventListCard.fxml`.
 
-### CommandSummaryCommand - Jacob
+### CommandSummary Command
 #### Description
 
 The `CommandSummaryCommand` class is a command that opens a pop-up window containing a Command Summary of DukePro(f)'s
@@ -228,7 +272,6 @@ constructor of `CommandResult`.
 When the command `command_summary` is input by the user, `LogicManager` parses the input and returns a 
 `CommandSummaryCommand`. The `execute` method is called with the `showCommands` parameter being set to `true`. 
 This causes `MainWindow` to execute the `handleCommandSummary` method, which opens the Command Summary Page.
-
 ### Block Feature
 #### Description
 
@@ -260,14 +303,14 @@ The following steps describe the execution of an `AddCommand`(`EditCommand`follo
 ##### Storage
 These changes also made the new `JsonAdaptedBlockedSlot` necessary in order to save blocked slots created by the user into the save file.
 
-Design Considerations
+#### Design Considerations:
 
 |   |Pros|Cons|
 |---|---|---|
 |Alternative 1: Have the `TimeSlot` class maintain a list of blocked time slots and prevent any new overlapping `TimeSlots` from being created.|Easy to implement. User is able to block out a specific time slot every day(e.g., 1800-1900 for dinner every day)|Does not work well with `FreeSlots` feature. User is unable to choose which days to have the blocked slot as it is applied to every day.|
 |Alternative 2 (currently chosen): Implementation described above.|Code is easier to extend with more features. User is able to select the time slot and date to block.|More difficult to implement. More testing required. Blocked time slots will have to be added one by one.|
 
-We originally intended for the user to block out a certain time slot for every day, making Option 1 a possibility, but we eventually decided that Option 2 will still be able to achieve this (although a little more effort is required) and is much more flexible.
+We originally intended for the user to block out a certain time slot for every day, making Alternative 1 a possibility, but we eventually decided that Alternative 2 will still be able to achieve this (although a little more effort is required) and is much more flexible.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -390,19 +433,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | add a consultation event       | easily record and remember consultation sessions with my students      |
 | `* * *`  | user                                       | delete a consultation event    | forget about cancelled consultations and free up my timetable          |
-| `* * *`  | user                                       | list out all my events         | find out what is my next engagement                                    |
+| `* * *`  | user                                       | list out all my consultation events         | find out what is my next engagement                                    |
 | `* * *`  | user                                       | list out all my free slots     | find a suitable slot to add a commitment                               |
 | `* * *`  | user                                       | save all the data entered      | view the data again the next time I open the app                       |
-| `* * *`  | busy user with many daily events           | search for an event by name    | locate the details of events without going through the entire list     |
+| `* * *`  | busy user with many daily events           | search for a consultation event by name    | locate the details of events without going through the entire list     |
 | `* * *`  | user                                       | block certain time slots       | reserve some private time for family/personal commitments              |
 | `* * *`  | meticulous user                            | add remarks to my events       | add details that I need to make preparations for before the event      |
 | `* * *`  | user                                       | edit a previously added event  | update changes in the details of my event                              |
 | `* * *`  | user                                       | exit the app                   |                                                                        |
-| `* *`    | user                                       | add tags to my events          | group them more easily                                                 |
+| `* *`    | user                                       | add tags to my consultation events          | group them more easily                                                 |
+| `* *`     | user                                       | I can filter my consultations by tags  | I can find consultations with certain tags more easily |
 | `* *`    | new user                                   | click a link to access the product website | receive help regarding any problems I have with the app    |
 | `* *`    | user                                       | clear the list of events       | empty out everything quickly instead of deleting them one by one       |
-| `* *`    | user                                       | list the upcoming events in the day | take note of what I should make preparations for                  |
-| `* *`    | user                                       | view the next upcoming event   | find out what is my next engagement                                    |
+| `* *`    | user                                       | list the upcoming consultation events in the day | take note of what I should make preparations for                  |
+| `* *`    | user                                       | view the next upcoming consultation event   | find out what is my next engagement                                    |
 | `* *`    | user                                       | print my schedule with censored details | send it to my students to see my available timings while maintaining confidentiality |
 | `*`      | new user                                   | see usage instructions/examples| refer to the instructions to learn how to optimize my usage of the app |
 
@@ -509,6 +553,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. The System rejects the command and tells the User that the specified time slot coincides with an event.
   
   Use case ends
+```
+
+```
+**UC05: List all upcoming events for the day**
+
+**MSS**
+
+1. User requests to view today's upcoming consultation events.
+2. DukePro(f) displays all the upcoming events.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. User inputs the wrong format for the command.
+
+  * 1a1. An error message telling the user that it's an unknown command.
+    
+    Use case ends.
+
+* 1b. DukePro(f) has no upcoming consultation events.
+
+  * 1b1. An empty events list is displayed with a message indicating that there are 0 upcoming events.
+  
+    Use case ends
+```
+
+```
+**UC06: List the next consultation event for the day**
+
+**MSS**
+
+1. User requests to view the next consultation event.
+2. DukePro(f) displays the next event.
+    
+    Use case ends.
+    
+**Extensions**
+
+* 1a. User inputs the wrong format for the command.
+
+  * 1a1. An error message telling the user that it's an unknown command.
+    
+    Use case ends.
+
+* 1b. DukePro(f) has no events scheduled.
+
+  * 1b1. An empty events list is displayed with a message indicating that there are 0 events scheduled.
+    
+    Use case ends
+```
+
+```
+**UC07: Filter consultation events by tags**
+
+**MSS**
+
+1. User requests to filter the consultation events by tag(s).
+2. DukePro(f) displays the events that have the specified tag(s).
+    
+    Use case ends.
+    
+**Extensions**
+
+* 1a. User inputs the wrong format for the command.
+
+  * 1a1. An error message is displayed with the correct format.
+    
+    Use case ends.
+
+* 1b. DukePro(f) has no consultation events that have the tag(s) specified
+
+  * 1b1. An empty events list is displayed with a with a message indicating 0 events are matched with the tags specified.
+  
+    Use case ends
 ```
 
 ### Non-Functional Requirements
