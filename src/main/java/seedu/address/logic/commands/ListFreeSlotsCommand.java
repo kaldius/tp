@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,19 +20,24 @@ public class ListFreeSlotsCommand extends Command {
 
     private Date today;
 
+    private LocalTime now;
+
     /**
      * Constructor for a FreeSlotsCommand.
      *
      * @param today Date instance for today
+     * @param now time now
      */
-    public ListFreeSlotsCommand(Date today) {
+    public ListFreeSlotsCommand(Date today, LocalTime now) {
         requireNonNull(today);
+        requireNonNull(now);
         this.today = today;
+        this.now = now;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        ArrayList<FreeSlot> freeSlots = model.getFreeSlots(today);
+        ArrayList<FreeSlot> freeSlots = model.getFreeSlots(today, now);
         StringBuilder result = new StringBuilder(MESSAGE_SUCCESS);
         for (FreeSlot f: freeSlots) {
             result.append("\n" + f.toString());

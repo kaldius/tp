@@ -1,9 +1,10 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-participant ListFreeSlotsCommand
-participant CommandResult
-participant Model
-participant Schedule
+!include style.puml
+participant "ListFreeSlotsCommand" as ListFreeSlotsCommand LOGIC_COLOR
+participant "CommandResult" as CommandResult LOGIC_COLOR
+participant "Model" as Model MODEL_COLOR
+participant "Schedule" as Schedule MODEL_COLOR
 -> ListFreeSlotsCommand:execute()
 activate ListFreeSlotsCommand
 ListFreeSlotsCommand -> Model:getFreeSlots()
@@ -12,8 +13,10 @@ Model -> Schedule:getFreeSlots()
 activate Schedule
 return freeSlots
 return freeSlots
+create CommandResult
 ListFreeSlotsCommand -> CommandResult:CommandResult()
 activate CommandResult
 return result
 return result
+destroy ListFreeSlotsCommand
 @enduml

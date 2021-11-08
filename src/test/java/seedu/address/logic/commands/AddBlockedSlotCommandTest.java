@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -194,7 +195,7 @@ public class AddBlockedSlotCommandTest {
         }
 
         @Override
-        public ArrayList<FreeSlot> getFreeSlots(Date date) {
+        public ArrayList<FreeSlot> getFreeSlots(Date date, LocalTime now) {
             throw new AssertionError("This method should not be called.");
         }
     }

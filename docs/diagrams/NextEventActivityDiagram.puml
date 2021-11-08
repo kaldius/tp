@@ -1,0 +1,13 @@
+@startuml
+start
+:User executes NextEventCommand;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+    :System filters the consultation events in the list after current time and date;
+    : System selects the first event in the list;
+    :System displays the next event;
+
+stop
+@enduml

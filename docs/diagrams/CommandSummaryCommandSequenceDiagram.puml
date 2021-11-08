@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ScheduleParser" as ScheduleParser LOGIC_COLOR
+participant "f:CommandSummaryCommand" as CommandSummaryCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("command_summary")
+activate LogicManager
+
+LogicManager -> ScheduleParser : parseCommand("command_summary")
+activate ScheduleParser
+
+create CommandSummaryCommand
+ScheduleParser -> CommandSummaryCommand
+activate CommandSummaryCommand
+
+CommandSummaryCommand --> ScheduleParser : f
+deactivate CommandSummaryCommand
+
+ScheduleParser --> LogicManager : f
+deactivate ScheduleParser
+
+LogicManager -> CommandSummaryCommand : execute(model)
+activate CommandSummaryCommand
+
+create CommandResult
+CommandSummaryCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CommandSummaryCommand : result
+deactivate CommandResult
+
+CommandSummaryCommand --> LogicManager : result
+deactivate CommandSummaryCommand
+destroy CommandSummaryCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

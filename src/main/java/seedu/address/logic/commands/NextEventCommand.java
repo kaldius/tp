@@ -31,15 +31,14 @@ public class NextEventCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        try {
-            requireNonNull(model);
-            model.updateFilteredEventList(timePredicate);
-            Event firstEvent = model.nextEventInTheList();
-            model.updateFilteredEventList(new IsEventPredicate(firstEvent));
-            return new CommandResult(Messages.MESSAGE_NEXT_EVENT_LISTED_OVERVIEW);
-        } catch (IndexOutOfBoundsException e) {
+        requireNonNull(model);
+        model.updateFilteredEventList(timePredicate);
+        Event firstEvent = model.nextEventInTheList();
+        if (firstEvent == null) {
             throw new CommandException(Messages.MESSAGE_NO_NEXT_EVENT);
         }
+        model.updateFilteredEventList(new IsEventPredicate(firstEvent));
+        return new CommandResult(Messages.MESSAGE_NEXT_EVENT_LISTED_OVERVIEW);
     }
 
     @Override

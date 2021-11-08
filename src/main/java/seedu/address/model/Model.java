@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -145,10 +146,11 @@ public interface Model {
     Event nextEventInTheList();
 
     /**
-     * Gets a list of all free slots from today's date to last event/block slot.
+     * Gets a list of all free slots from now to 2359 of date with last event/block slot.
      *
      * @param date Today's date
+     * @param now time now
      * @return ArrayList of freeSlots
      */
-    ArrayList<FreeSlot> getFreeSlots(Date date);
+    ArrayList<FreeSlot> getFreeSlots(Date date, LocalTime now);
 }

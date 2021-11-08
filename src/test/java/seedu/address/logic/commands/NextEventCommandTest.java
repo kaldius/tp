@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_NEXT_EVENT_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_NEXT_EVENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.getTypicalSchedule;
 
@@ -15,6 +17,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -48,6 +51,17 @@ public class NextEventCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE), model.getFilteredEventList());
     }
+
+    @Test
+    public void execute_noNextEvent() {
+        String expectedMessage = MESSAGE_NO_NEXT_EVENT;
+        EventContainsCurrentTimePredicate predicate =
+                new EventContainsCurrentTimePredicate(LocalTime.parse("0730", timeFormatter),
+                new Date("2019-01-01"));
+        assertThrows(CommandException.class, expectedMessage, () ->
+                new NextEventCommand(predicate).execute(model));
+    }
+
     @Test
     public void equals() {
         NextEventCommand firstCommand = new NextEventCommand();
@@ -72,4 +86,5 @@ public class NextEventCommandTest {
         // different dates and time -> returns false
         assertFalse(thirdCommand.equals(fourthCommand));
     }
+
 }

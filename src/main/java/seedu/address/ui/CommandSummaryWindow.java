@@ -24,12 +24,16 @@ public class CommandSummaryWindow extends UiPart<Stage> {
      *
      * @param root Stage to use as the root of the CommandSummaryWindow.
      */
+    //@@author jacobnbh - reused
+    // code snippet adapted from fellow tutorial group, T11-2's source code with minor modifications that are
+    // customized to our project
     public CommandSummaryWindow(Stage root) {
         super(FXML, root);
         for (CommandEnum command : CommandEnum.values()) {
             commandDescription.getPanes().add(new CommandDescCard(command, this).getRoot());
         }
     }
+    //@@author
 
     public CommandSummaryWindow() {
         this(new Stage());

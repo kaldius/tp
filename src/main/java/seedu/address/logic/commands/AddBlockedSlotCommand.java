@@ -23,7 +23,7 @@ public class AddBlockedSlotCommand extends Command {
             + PREFIX_DATE + "DATE "
             + PREFIX_TIMESLOT + "TIMESLOT "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATE + "2020-10-13 "
+            + PREFIX_DATE + "2021-11-13 "
             + PREFIX_TIMESLOT + "1300-1400";
 
     public static final String MESSAGE_SUCCESS = "New slot blocked out: %1$s\n";

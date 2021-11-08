@@ -10,7 +10,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 Given below are my contributions to the project.
 
-* **New Feature**: List Free Slots Command
+* **New Feature**: List Free Slots Feature
     * What it does: Goes through all events and blocked time slots in the schedule 
       and finds all free slots between them. 
       Display this list of free slots in a format that is easy to read and distribute.
@@ -28,9 +28,10 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Added usage instructions for List Free Slots Command
+        * Added line breaks and formatting for pdf conversion
     * Developer Guide:
         * Added NFR and Glossary to requirements section
-        * Added implementation details of the addition of the Sorted Event List feature and List Free Slots Command
+        * Added implementation details of the addition of the Sorted Event List feature and List Free Slots Feature
 
 * **Team-Based Tasks**:
     * Set up team's organisation and repository

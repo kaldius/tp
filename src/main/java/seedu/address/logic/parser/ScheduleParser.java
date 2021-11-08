@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,7 +78,7 @@ public class ScheduleParser {
             return new NextEventCommand();
 
         case ListFreeSlotsCommand.COMMAND_WORD:
-            return new ListFreeSlotsCommand(Date.TODAY);
+            return new ListFreeSlotsCommand(Date.TODAY, LocalTime.now());
 
         case FilterByTagCommand.COMMAND_WORD:
             return new FilterByTagCommandParser().parse(arguments);

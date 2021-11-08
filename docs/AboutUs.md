@@ -11,15 +11,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/jacobnbh.png" width="200px">
 
-[[github](https://github.com/jacobnbh)]
+[[github](https://github.com/jacobnbh)][[portfolio](team/jacobnbh.md)]
 
 * Role: Developer
 
-### Ruth Poh
+### Poh Hui-En Ruth
 
 <img src="images/ruthpohrp.png" width="200px">
 
-[[github](https://github.com/ruthpohrp)]
+[[github](https://github.com/ruthpohrp)][[portfolio](team/ruthpohrp.md)]
 
 * Role: Developer
 
@@ -27,16 +27,16 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/csygalvin.png" width="200px">
 
-[[github](http://github.com/csygalvin)]
+[[github](http://github.com/csygalvin)][[portfolio](team/csygalvin.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+
 
 ### Quan Teng Foong
 
 <img src="images/kaldius.png" width="200px" alt="kaldius_photo">
 
-[github](http://github.com/kaldius)
+[[github](http://github.com/kaldius)][[portfolio](team/kaldius.md)]
 
 * Role: Developer
 
@@ -44,7 +44,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/luluyousef.png" width="200px">
 
-[github](https://github.com/luluyousef)
-[portfolio](team/johndoe.md)
+[[github](https://github.com/luluyousef)][[portfolio](team/luluyousef.md)]
 
 * Role: Developer

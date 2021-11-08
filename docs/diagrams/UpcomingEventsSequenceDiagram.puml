@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ScheduleParser" as ScheduleParser LOGIC_COLOR
+participant "u:UpcomingEventsCommand" as UpcomingEventsCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("upcoming_events")
+activate LogicManager
+
+LogicManager -> ScheduleParser : parseCommand("upcoming_events"))
+activate ScheduleParser
+
+create UpcomingEventsCommand
+ScheduleParser -> UpcomingEventsCommand
+activate UpcomingEventsCommand
+
+UpcomingEventsCommand --> ScheduleParser : u
+deactivate UpcomingEventsCommand
+
+ScheduleParser --> LogicManager : u
+deactivate ScheduleParser
+
+LogicManager -> UpcomingEventsCommand : execute(model)
+activate UpcomingEventsCommand
+
+UpcomingEventsCommand -> Model : updateFilteredEventList(predicate)
+activate Model
+
+Model --> UpcomingEventsCommand
+deactivate Model
+
+create CommandResult
+UpcomingEventsCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UpcomingEventsCommand : result
+deactivate CommandResult
+
+UpcomingEventsCommand --> LogicManager : result
+deactivate UpcomingEventsCommand
+destroy UpcomingEventsCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

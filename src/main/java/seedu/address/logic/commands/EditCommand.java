@@ -47,7 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "2020-10-14 "
+            + PREFIX_DATE + "2021-11-14 "
             + PREFIX_TIMESLOT + "0800-0900";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";

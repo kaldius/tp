@@ -6,9 +6,10 @@
 
 ![Ui](docs/images/Ui.png)
 
-DukePro(f) is a schedule-planning desktop application that assists **university professors** in managing
-their **consultations**. Amidst long hours of lectures and tutorials in the week, professors may still need 
-to cater timeslots for **student consultations**, which can be hard to come by and difficult to keep track of. 
+DukePro(f) is a schedule-planning desktop application that assists **university professors** in managing 
+their **consultations**. Amidst long hours of lectures and tutorials in the week, professors may still 
+need to cater timeslots for **student consultations**, which can be hard to come by and difficult to keep 
+track of. 
 
 It is named `DukePro(f)` (Duke-Professor) because our project's target audience is professors, and it is also a nod 
 to our CS2103T iP (individual Project), which was named `Duke`.

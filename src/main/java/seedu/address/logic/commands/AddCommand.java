@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jacob Ng "
-            + PREFIX_DATE + "2020-10-13 "
+            + PREFIX_DATE + "2021-11-13 "
             + PREFIX_TIMESLOT + "1300-1400 "
             + PREFIX_LOCATION + "The Deck "
             + PREFIX_TAG + "CS1231S "

@@ -1,33 +1,22 @@
 @startuml
 'https://plantuml.com/activity-diagram-beta
-
+!include style.puml
 start
-:getFreeSlots();
 :merge SortedEventList and SortedBlockedSlotList;
-:construct ArrayList to store freeSlots;
+:construct list to store freeSlots;
 if(no Overlappable in schedule) then (yes)
-    :return freeSlots;
-    stop
-elseif(one Overlappable in schedule) then (yes)
-    :add empty dates from today until date of Overlappable;
-    :add freeSlot on date of Overlappable from 0000 to start time of Overlappable;
-    :add freeSlot on date of Overlappable from end time of Overlappable to 2359;
-    :return freeSlots;
+    :return empty list of freeSlots;
     stop
 else (no)
-    :add empty dates from today until date of first Overlappable;
+    :add freeSlot from 0000 today to\nstart time of first Overlappable;
     repeat
     :get previous Overlappable;
     :get current Overlappable;
-    :add freeSlot in between previous and current Overlappable;
-    note left
-    ignores past Overlappable
-    end note
+    :add freeSlot in between previous\nand current Overlappable;
     repeat while(last Overlappable?) is (no)
     ->yes;
-    :add freeSlot from end time of last Overlappable to 2359;
-    :return freeSlots;
+    :add freeSlot from end time of last Overlappable\nto 2359;
+    :remove all past freeSlots;
+    :return list of freeSlots;
     stop
-
-
 @enduml

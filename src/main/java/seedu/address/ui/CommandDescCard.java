@@ -29,6 +29,9 @@ public class CommandDescCard extends UiPart<TitledPane> {
     /**
      * Creates a Command Description Card based on the {@code Command} and Command Description window supplied.
      */
+    //@@author jacobnbh - reused
+    // code snippet adapted from fellow tutorial group, T11-2's source code with minor modifications that are
+    // customized to our project
     public CommandDescCard(CommandEnum commandWord, CommandSummaryWindow commandSummaryWindow) {
         super(FXML);
         this.commandSummaryWindow = commandSummaryWindow;
@@ -136,4 +139,5 @@ public class CommandDescCard extends UiPart<TitledPane> {
             assert false : "CommandDescCard: Invalid Command";
         }
     }
+    //@@author
 }
