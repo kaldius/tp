@@ -16,6 +16,33 @@ public class CommandResultTest {
     }
 
     @Test
+    public void isShowHelp() {
+        CommandResult commandResultFalse = new CommandResult("validFeedback", false, false, false);
+        CommandResult commandResultTrue = new CommandResult("valicFeedback", true, true, true);
+
+        assertFalse(commandResultFalse.isShowHelp());
+        assertTrue(commandResultTrue.isShowHelp());
+    }
+
+    @Test
+    public void isShowCommands() {
+        CommandResult commandResultFalse = new CommandResult("validFeedback", false, false, false);
+        CommandResult commandResultTrue = new CommandResult("valicFeedback", true, true, true);
+
+        assertFalse(commandResultFalse.isShowCommands());
+        assertTrue(commandResultTrue.isShowCommands());
+    }
+
+    @Test
+    public void isExit() {
+        CommandResult commandResultFalse = new CommandResult("validFeedback", false, false, false);
+        CommandResult commandResultTrue = new CommandResult("valicFeedback", true, true, true);
+
+        assertFalse(commandResultFalse.isExit());
+        assertTrue(commandResultTrue.isExit());
+    }
+
+    @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
 

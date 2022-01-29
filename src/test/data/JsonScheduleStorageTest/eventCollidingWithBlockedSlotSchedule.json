@@ -1,0 +1,22 @@
+{
+  "events": [ {
+    "name": "Valid Event",
+    "date": "2020-01-01",
+    "startTime": "1300",
+    "endTime" : "1400",
+    "location": "4th street",
+    "remark": "This is a remark."
+  }, {
+    "name": "Valid Event 2",
+    "date": "2020-01-02",
+    "startTime": "1330",
+    "endTime" : "1430",
+    "location": "4th street",
+    "remark": "This is a remark."
+  } ],
+  "blockedSlots" : [ {
+    "date" : "2020-01-01",
+    "startTime" : "1300",
+    "endTime" : "1400"
+  } ]
+}

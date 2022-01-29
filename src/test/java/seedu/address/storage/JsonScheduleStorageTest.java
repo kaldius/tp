@@ -61,6 +61,16 @@ public class JsonScheduleStorageTest {
     }
 
     @Test
+    public void readSchedule_validCollidingEventsSchedule_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readSchedule("validCollidingEventsSchedule.json"));
+    }
+
+    @Test
+    public void readSchedule_eventCollidingWithBlockedSlotSchedule_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readSchedule("eventCollidingWithBlockedSlotSchedule.json"));
+    }
+
+    @Test
     public void readAndSaveSchedule_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempSchedule.json");
         Schedule original = getTypicalSchedule();

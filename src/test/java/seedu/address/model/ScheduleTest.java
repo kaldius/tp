@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.ALICE;
@@ -22,6 +23,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.blockedslot.BlockedSlot;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
+import seedu.address.testutil.EventBuilder;
 
 public class ScheduleTest {
 
@@ -175,4 +177,23 @@ public class ScheduleTest {
         }
     }
 
+    @Test
+    public void hashCodeMethod() {
+        Schedule scheduleA = new Schedule();
+        Schedule sameAsScheduleA = new Schedule();
+        Schedule scheduleB = new Schedule();
+        Schedule emptySchedule = new Schedule();
+
+        Event eventA = new EventBuilder().build();
+        Event eventB = new EventBuilder().withName("Another Name").build();
+
+        scheduleA.addEvent(eventA);
+        sameAsScheduleA.addEvent(eventA);
+        scheduleB.addEvent(eventB);
+
+        assertEquals(scheduleA.hashCode(), scheduleA.hashCode());
+        assertEquals(scheduleA.hashCode(), sameAsScheduleA.hashCode());
+        assertNotEquals(sameAsScheduleA.hashCode(), scheduleB.hashCode());
+        assertNotEquals(scheduleA.hashCode(), emptySchedule.hashCode());
+    }
 }

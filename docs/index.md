@@ -9,7 +9,7 @@ title: DukePro(f)
 
 DukePro(f) is a schedule-planning desktop application that assists **university professors** in managing
 their **consultations**, through the usage of an intuitive **Command-Line Interface (CLI)**<sup>1</sup>
-and an easy-to-navigate Graphical User Interface (GUI)<sup>2</sup>.
+and an easy-to-navigate **Graphical User Interface (GUI)**<sup>2</sup>.
 
 It is named `DukePro(f)` (Duke-Professor) because our project's target audience is professors, and it is also a nod
 to our CS2103T iP (individual Project), which was named `Duke`.

@@ -1,6 +1,8 @@
 package seedu.address.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ENDTIME_BOB;
@@ -62,6 +64,15 @@ public class EventTest {
         // different tags -> returns false
         editedAlice = new EventBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Event eventA = new EventBuilder().build();
+        Event sameAsEventA = new EventBuilder().build();
+        Event eventB = new EventBuilder().withName("Different Name").build();
+        assertEquals(eventA.hashCode(), sameAsEventA.hashCode());
+        assertNotEquals(eventA.hashCode(), eventB.hashCode());
     }
 
     @Test

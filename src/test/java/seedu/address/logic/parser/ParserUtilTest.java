@@ -48,8 +48,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -151,6 +151,13 @@ public class ParserUtilTest {
         String timeWithWhitespace = WHITESPACE + VALID_TIMESLOT + WHITESPACE;
         TimeSlot expectedTime = new TimeSlot(VALID_TIMESLOT_STARTTIME, VALID_TIMESLOT_ENDTIME);
         assertEquals(expectedTime, ParserUtil.parseTimeSlot(timeWithWhitespace));
+    }
+
+    @Test
+    public void parseTimeSlot_onlyOneTimeProvided_throwsParserException() throws Exception {
+        String invalidTimeSlot = VALID_TIMESLOT_STARTTIME;
+        assertThrows(ParseException.class, TimeSlot.MESSAGE_CONSTRAINTS, () ->
+                ParserUtil.parseTimeSlot(invalidTimeSlot));
     }
 
     @Test

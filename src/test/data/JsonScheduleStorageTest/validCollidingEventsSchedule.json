@@ -1,0 +1,17 @@
+{
+  "events": [ {
+    "name": "Valid Event",
+    "date": "2020-01-01",
+    "startTime": "1300",
+    "endTime" : "1400",
+    "location": "4th street",
+    "remark": "This is a remark."
+  }, {
+    "name": "Valid Event with colliding time slot",
+    "date": "2020-01-01",
+    "startTime": "1330",
+    "endTime" : "1430",
+    "location": "4th street",
+    "remark": "This is a remark."
+  } ]
+}

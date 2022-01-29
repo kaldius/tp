@@ -1,6 +1,8 @@
 package seedu.address.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -48,7 +50,8 @@ public class DateTest {
         assertTrue(earlierDate.compareTo(sameAsEarlierDate) == 0);
     }
 
-    @Test void hasSameDate() {
+    @Test
+    public void hasSameDate() {
         Date earlierDate = new Date("2020-01-01");
         Date sameAsEarlierDate = new Date("2020-01-01");
         Date laterDate = new Date("2020-01-02");
@@ -56,4 +59,21 @@ public class DateTest {
         assertFalse(earlierDate.hasSameDate(laterDate));
     }
 
+    @Test
+    public void equalsMethod() {
+        Date dateA = new Date("2020-01-01");
+        Date sameAsDateA = new Date("2020-01-01");
+        Date dateB = new Date("2020-01-02");
+        assertTrue(dateA.equals(sameAsDateA));
+        assertFalse(dateA.equals(dateB));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Date dateA = new Date("2020-01-01");
+        Date sameAsDateA = new Date("2020-01-01");
+        Date dateB = new Date("2020-01-02");
+        assertEquals(dateA.hashCode(), sameAsDateA.hashCode());
+        assertNotEquals(dateA.hashCode(), dateB.hashCode());
+    }
 }

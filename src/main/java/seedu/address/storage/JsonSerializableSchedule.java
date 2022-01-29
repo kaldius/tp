@@ -54,9 +54,7 @@ class JsonSerializableSchedule {
         Schedule schedule = new Schedule();
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
-            if (schedule.isBlockedByBlockedSlot(event)) {
-                throw new IllegalValueException(JsonAdaptedBlockedSlot.SLOT_BLOCKED);
-            } else if (schedule.isBlockedByEvent(event)) {
+            if (schedule.isBlockedByEvent(event)) {
                 throw new IllegalValueException(JsonAdaptedEvent.SLOT_BLOCKED);
             }
             schedule.addEvent(event);

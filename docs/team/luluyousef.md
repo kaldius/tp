@@ -27,9 +27,10 @@ Given below are my contributions to the project.
                      It is relevant because the user might want to find events such as those that are urgent and prepare for them beforehand. 
     
 
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=luluyousef&sort=groupTitle&sortWithin=title&since=2021-09-17&timefr=undefined&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
+* **Project management**:
+    * Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
     * Added test cases for the classes of the new features and other relevant classes to increase test coverage([#70](https://github.com/AY2122S1-CS2103T-T11-4/tp/pull/70), [#87](https://github.com/AY2122S1-CS2103T-T11-4/tp/pull/87), [#91](https://github.com/AY2122S1-CS2103T-T11-4/tp/pull/91)).

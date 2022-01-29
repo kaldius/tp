@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
@@ -13,20 +15,29 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddBlockedSlotCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CommandSummaryCommand;
+import seedu.address.logic.commands.DeleteBlockedSlotCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterByTagCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListBlockedSlotsCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFreeSlotsCommand;
 import seedu.address.logic.commands.NextEventCommand;
 import seedu.address.logic.commands.UpcomingEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.blockedslot.BlockedSlot;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.NameContainsKeywordsPredicate;
+import seedu.address.model.event.TagContainsKeywordsPredicate;
+import seedu.address.testutil.BlockedSlotBuilder;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventUtil;
@@ -77,15 +88,34 @@ public class ScheduleParserTest {
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
+
     @Test
     public void parseCommand_upcomingEvents() throws Exception {
         assertTrue(parser.parseCommand(UpcomingEventsCommand.COMMAND_WORD) instanceof UpcomingEventsCommand);
-        assertTrue(parser.parseCommand(UpcomingEventsCommand.COMMAND_WORD + " 3") instanceof UpcomingEventsCommand);
+        assertTrue(parser.parseCommand(
+                UpcomingEventsCommand.COMMAND_WORD + " 3")instanceof UpcomingEventsCommand);
     }
+
     @Test
     public void parseCommand_nextEvent() throws Exception {
         assertTrue(parser.parseCommand(NextEventCommand.COMMAND_WORD) instanceof NextEventCommand);
         assertTrue(parser.parseCommand(NextEventCommand.COMMAND_WORD + " 3") instanceof NextEventCommand);
+    }
+
+    @Test
+    public void parseCommand_listFreeSlots() throws Exception {
+        assertTrue(parser.parseCommand(ListFreeSlotsCommand.COMMAND_WORD) instanceof ListFreeSlotsCommand);
+        assertTrue(parser.parseCommand(
+                ListFreeSlotsCommand.COMMAND_WORD + " 3") instanceof ListFreeSlotsCommand);
+    }
+
+    @Test
+    public void parseCommand_filterByTag() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FilterByTagCommand command = (FilterByTagCommand) parser.parseCommand(
+                FilterByTagCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterByTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -101,13 +131,46 @@ public class ScheduleParserTest {
     }
 
     @Test
+    public void parseCommand_addBlockedSlot() throws Exception {
+        BlockedSlot blockedSlot = new BlockedSlotBuilder().build();
+        AddBlockedSlotCommand command =
+                (AddBlockedSlotCommand) parser.parseCommand(AddBlockedSlotCommand.COMMAND_WORD + " "
+                        + PREFIX_DATE + BlockedSlotBuilder.DEFAULT_DATE + " " + PREFIX_TIMESLOT
+                        + BlockedSlotBuilder.DEFAULT_STARTTIME + "-" + BlockedSlotBuilder.DEFAULT_ENDTIME);
+        assertEquals(new AddBlockedSlotCommand(blockedSlot), command);
+    }
+
+    @Test
+    public void parseCommand_listBlockedSlots() throws Exception {
+        assertTrue(parser.parseCommand(ListBlockedSlotsCommand.COMMAND_WORD) instanceof ListBlockedSlotsCommand);
+        assertTrue(parser.parseCommand(
+                ListBlockedSlotsCommand.COMMAND_WORD + " 3") instanceof ListBlockedSlotsCommand);
+    }
+
+    @Test
+    public void parseCommand_commandSummary() throws Exception {
+        assertTrue(parser.parseCommand(CommandSummaryCommand.COMMAND_WORD) instanceof CommandSummaryCommand);
+        assertTrue(parser.parseCommand(
+                CommandSummaryCommand.COMMAND_WORD + " 3") instanceof CommandSummaryCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteBlockedSlot() throws Exception {
+        DeleteBlockedSlotCommand command = (DeleteBlockedSlotCommand) parser.parseCommand(
+                DeleteBlockedSlotCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
+        assertEquals(new DeleteBlockedSlotCommand(INDEX_FIRST_EVENT), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
 }

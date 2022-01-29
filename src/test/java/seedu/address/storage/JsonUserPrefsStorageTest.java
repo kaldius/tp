@@ -24,6 +24,13 @@ public class JsonUserPrefsStorageTest {
     public Path testFolder;
 
     @Test
+    public void getUserPrefsFilePath() {
+        Path prefsFilePath = testFolder.resolve("TempPrefs.json");
+        JsonUserPrefsStorage storage = new JsonUserPrefsStorage(prefsFilePath);
+        assertEquals(prefsFilePath, storage.getUserPrefsFilePath());
+    }
+
+    @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
@@ -105,8 +112,8 @@ public class JsonUserPrefsStorageTest {
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
 
-        Path pefsFilePath = testFolder.resolve("TempPrefs.json");
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
+        Path prefsFilePath = testFolder.resolve("TempPrefs.json");
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(prefsFilePath);
 
         //Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);

@@ -16,7 +16,7 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * A list of events is sorted chronologically and does not allow nulls.
- * Duplicate Events are allowed in this Event list to accomodate repeated events with same person.
+ * Duplicate Events are allowed in this Event list to accommodate repeated events with same person.
  *
  * Supports a minimal set of list operations.
  *

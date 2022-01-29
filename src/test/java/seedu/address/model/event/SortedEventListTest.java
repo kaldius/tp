@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -169,6 +170,28 @@ public class SortedEventListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> sortedEventList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        SortedEventList listA = new SortedEventList();
+        SortedEventList sameAsListA = new SortedEventList();
+        SortedEventList listB = new SortedEventList();
+        SortedEventList emptyList = new SortedEventList();
+
+
+        Event eventA = new EventBuilder().build();
+        Event eventB = new EventBuilder().withName("Different Name").build();
+
+        listA.add(eventA);
+        listA.add(eventB);
+        sameAsListA.add(eventA);
+        sameAsListA.add(eventB);
+        listB.add(eventB);
+
+        assertEquals(listA.hashCode(), sameAsListA.hashCode());
+        assertNotEquals(listA.hashCode(), listB.hashCode());
+        assertNotEquals(listA.hashCode(), emptyList.hashCode());
     }
 
     @Test
